@@ -1,0 +1,1 @@
+export const BOOKING_URL = "https://form.jotform.com/260864762854873";

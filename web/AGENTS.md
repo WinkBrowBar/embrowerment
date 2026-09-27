@@ -1,0 +1,3 @@
+- Home page sections live in `src/components/site/` (Header, Hero, Definition, Sections, Footer); all styles in `src/styles.css` under the EMBROWERMENT block.
+- Pages: `/`, `/method`, `/permanent-makeup`, `/pmu-policies`, `/returns`. Shop / Academy / Foundation are plain nav text (no pages yet).
+- All link targets are centralized in `src/components/site/data.ts` (`LINKS`); images in `public/images/`, mapped in `IMG`.
