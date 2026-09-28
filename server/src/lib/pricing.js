@@ -25,6 +25,7 @@ export async function quote(lines, { couponCode, user } = {}) {
     if (l.kind === "product") {
       const p = products.find(x => String(x._id) === String(l.ref));
       if (!p || !p.active) { problems.push({ ref: l.ref, message: "No longer available" }); continue; }
+      if (p.comingSoon) { problems.push({ ref: l.ref, message: `${p.name} is coming soon` }); continue; }
       const variant = p.variants.length ? (l.variant || p.variants[0].name) : "";
       if (p.variants.length && !p.variants.some(v => v.name === variant)) { problems.push({ ref: l.ref, message: `${p.name}: shade unavailable` }); continue; }
       const qty = Math.max(1, Math.min(99, Number(l.qty) || 1));

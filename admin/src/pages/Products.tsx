@@ -10,13 +10,13 @@ export function Products() {
     {data && (data.products.length ? <table className="table card"><thead><tr><th></th><th>Name</th><th>Category</th><th className="num">Price</th><th className="num">Stock</th><th>Status</th></tr></thead>
       <tbody>{data.products.map((p: any) => <tr key={p._id}>
         <td>{p.images[0] && <img className="mini" src={p.images[0]} alt="" />}</td>
-        <td><Link to={`/products/${p._id}`}>{p.name}</Link>{p.featured && <span className="pill">Featured</span>}</td><td>{p.category}</td><td className="num">{money(p.price)}</td>
+        <td><Link to={`/products/${p._id}`}>{p.name}</Link>{p.featured && <span className="pill">Featured</span>}{p.comingSoon && <span className="pill">Coming soon</span>}</td><td>{p.category}</td><td className="num">{money(p.price)}</td>
         <td className="num">{!p.trackInventory ? "∞" : p.variants.length ? p.variants.reduce((n: number, v: any) => n + v.stock, 0) : p.stock}</td>
         <td>{p.active ? <span className="ok">Active</span> : <span className="muted">Hidden</span>}</td></tr>)}</tbody></table> : <Empty>No products yet.</Empty>)}
   </Page>;
 }
 
-const blank = { name: "", slug: "", tagline: "", description: "", price: 0, compareAtPrice: null, category: "Brows", images: [] as string[], variantLabel: "Shade", variants: [] as any[], stock: 0, trackInventory: true, sections: [] as any[], featured: false, active: true, sort: 0 };
+const blank = { name: "", slug: "", tagline: "", description: "", price: 0, compareAtPrice: null, category: "Brows", images: [] as string[], variantLabel: "Shade", variants: [] as any[], stock: 0, trackInventory: true, sections: [] as any[], featured: false, comingSoon: false, active: true, sort: 0 };
 
 export function ProductEdit() {
   const { id } = useParams(); const nav = useNavigate(); const isNew = id === "new";
@@ -68,6 +68,7 @@ export function ProductEdit() {
         <section className="card stack-sm">
           <Toggle checked={p.active} onChange={v => set("active", v)} label="Visible in store" />
           <Toggle checked={p.featured} onChange={v => set("featured", v)} label="Featured" />
+          <Toggle checked={!!p.comingSoon} onChange={v => set("comingSoon", v)} label="Coming soon (visible, not purchasable)" />
           <Toggle checked={p.trackInventory} onChange={v => set("trackInventory", v)} label="Track inventory" />
         </section>
         <section className="card grid-form one">

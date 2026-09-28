@@ -7,13 +7,13 @@ import { IMG } from "./data";
 function Tile({ p, feature = false }: { p: Product; feature?: boolean }) {
   const { add } = useStore();
   return <article className={`ctile${feature ? " feature" : ""}`}>
-    <Link to="/shop/$slug" params={{ slug: p.slug }} className="ctile-img"><SafeImg src={p.images[0]} alt={p.name} loading="lazy" /></Link>
+    <Link to="/shop/$slug" params={{ slug: p.slug }} className="ctile-img"><SafeImg src={p.images[0]} alt={p.name} loading="lazy" />{p.comingSoon && <span className="tag">Coming soon</span>}</Link>
     <div className="ctile-meta">
       <div><Link to="/shop/$slug" params={{ slug: p.slug }}><h3>{p.name}</h3></Link>{(feature || p.tagline) && <p>{p.tagline}</p>}</div>
       <span>{money(p.price)}</span>
     </div>
     <div className="ctile-cta">
-      {p.variants.length ? <Link to="/shop/$slug" params={{ slug: p.slug }} className="btn-mono">Choose {p.variantLabel.toLowerCase() || "option"}</Link>
+      {p.comingSoon ? <Link to="/shop/$slug" params={{ slug: p.slug }} className="btn-mono">Coming soon</Link> : p.variants.length ? <Link to="/shop/$slug" params={{ slug: p.slug }} className="btn-mono">Choose {p.variantLabel.toLowerCase() || "option"}</Link>
         : <button className={feature ? "btn-solid" : "btn-mono"} disabled={!p.inStock} onClick={() => add({ kind: "product", ref: p.id, qty: 1 })}>{p.inStock ? (feature ? "Add to bag" : "Add") : "Sold out"}</button>}
     </div>
   </article>;

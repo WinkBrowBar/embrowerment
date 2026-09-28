@@ -16,7 +16,7 @@ export async function api<T = any>(path: string, opts: { method?: string; body?:
 export const money = (n?: number) => `$${Number(n || 0).toFixed(2)}`;
 
 export type Variant = { name: string; inStock: boolean };
-export type Product = { id: string; name: string; slug: string; tagline: string; description: string; price: number; compareAtPrice?: number; category: string; images: string[]; variantLabel: string; variants: Variant[]; sections: { title: string; body: string }[]; inStock: boolean; featured: boolean };
+export type Product = { id: string; name: string; slug: string; tagline: string; description: string; price: number; compareAtPrice?: number; category: string; images: string[]; variantLabel: string; variants: Variant[]; sections: { title: string; body: string }[]; inStock: boolean; featured: boolean; comingSoon?: boolean };
 export type Lesson = { id: string; title: string; durationMin: number; preview: boolean; videoUrl?: string; content?: string };
 export type Course = { id: string; title: string; slug: string; summary: string; description: string; price: number; image: string; points: string[]; owned: boolean; lessonCount: number; totalMinutes: number; lessons: Lesson[] };
 export type Line = { kind: "product" | "course"; ref: string; variant?: string | undefined; qty: number };

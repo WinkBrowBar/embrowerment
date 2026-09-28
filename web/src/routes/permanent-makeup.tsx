@@ -38,9 +38,10 @@ function PriceList({ title, rows }: { title: string; rows: Row[] }) {
 
 function PMU() {
   const book = <SmartLink href={LINKS.consult} className="btn-solid">Book a Consultation</SmartLink>;
+  const lookbook = <SmartLink href={LINKS.lookbook} className="btn-mono">View the Lookbook</SmartLink>;
   return <>
     <PageHero title="permanent makeup" image={IMG.products1} alt="Woman with a glowing natural makeup look">
-      {book}
+      <div className="row">{book}{lookbook}</div>
       <p>Consultations are personally conducted by Umbreen at no- charge and are designed solely to assess candidacy, suitability, and long-term outcomes. If you are booked following consultation and approval, the service is performed by certified and vetted artists who are certified in the Embrowerment® Method.</p>
     </PageHero>
 
@@ -80,7 +81,8 @@ function PMU() {
     <Concierge title="Embrowerment® Concierge" quoteTitle="Contact us" quote={{ text: "My brows were custom mapped to align with my face and bone structure, the brow color was matched to my liking. The results were impeccable and I was on a zoom call later the same day.", by: "PMU Client" }} />
 
     <section className="feat">
-      <div className="feat-head wide reveal"><h3 className="h-display">We have years of experience in all skin tones and types</h3></div>
+      <div className="feat-head reveal"><h3 className="h-display">We have years of experience in all skin tones and types</h3>
+        <div className="feat-copy"><p>See healed results across skin tones, types and techniques.</p><SmartLink href={LINKS.lookbook} className="more">View the Lookbook <span aria-hidden="true">→</span></SmartLink></div></div>
       <div className="grid-3">
         <Ph src={IMG.pmu[0]} alt="Black and white silhouette behind sheer mesh" />
         <Ph src={IMG.pmu[1]} alt="Black and white motion-blurred portrait" />

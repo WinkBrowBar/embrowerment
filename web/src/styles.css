@@ -321,7 +321,7 @@ img { display: block; max-width: 100%; }
 .phero-text { display: flex; flex-direction: column; justify-content: flex-end; gap: 24px; padding: clamp(64px, 9vw, 160px) var(--gutter) clamp(48px, 6vw, 96px); }
 .phero h1 { font-size: clamp(52px, 8vw, 144px); }
 .phero-body { display: flex; flex-direction: column; gap: 28px; max-width: 620px; font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
-.phero-body a:not(.btn-solid):not(.more) { text-decoration: underline; text-underline-offset: 3px; }
+.phero-body a:not(.btn-solid):not(.btn-mono):not(.more) { text-decoration: underline; text-underline-offset: 3px; }
 .phero-body b { color: var(--ink); }
 .phero-img { position: relative; min-height: 420px; }
 .phero-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -742,3 +742,7 @@ img { display: block; max-width: 100%; }
 /* ---------- LOGO ---------- */
 .hdr-logo img { height: 26px; }
 @media (max-width: 420px) { .hdr-logo img { height: 20px; } }
+
+/* ---------- COMING SOON ---------- */
+.ctile-img .tag, .pdp-img .tag { position: absolute; left: calc(var(--mat, 14px) + 8px); top: calc(var(--mat, 14px) + 8px); z-index: 2; background: var(--ink); color: var(--on-ink); font-family: var(--head); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 6px 10px; }
+.phero-body .row .btn-mono { padding: 17px 30px; }

@@ -10,6 +10,7 @@ export const LINKS = {
   tiktok: "https://tiktok.com/@embrowerment",
   facebook: "https://www.facebook.com/thisisumbreen",
   consult: "https://form.jotform.com/260343754783059",
+  lookbook: "https://lookbook.embrowerment.com/",
 };
 
 export const CONCIERGE = {

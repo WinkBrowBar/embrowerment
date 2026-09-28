@@ -15,12 +15,13 @@ const productSchema = new mongoose.Schema({
   trackInventory: { type: Boolean, default: true },
   sections: { type: [{ title: String, body: String, _id: false }], default: [] }, // accordions on the product page
   featured: { type: Boolean, default: false },
+  comingSoon: { type: Boolean, default: false },   // visible but not purchasable
   active: { type: Boolean, default: true },
   sort: { type: Number, default: 0 },
 }, { timestamps: true });
 
 productSchema.methods.available = function (variant, qty = 1) {
-  if (!this.active) return false;
+  if (!this.active || this.comingSoon) return false;
   if (!this.trackInventory) return true;
   if (this.variants.length) {
     const v = this.variants.find(x => x.name === variant);

@@ -8,9 +8,9 @@ const r = Router();
 
 const productOut = (p) => ({
   id: p._id, name: p.name, slug: p.slug, tagline: p.tagline, description: p.description, price: p.price, compareAtPrice: p.compareAtPrice,
-  category: p.category, images: p.images, variantLabel: p.variantLabel, sections: p.sections, featured: p.featured,
+  category: p.category, images: p.images, variantLabel: p.variantLabel, sections: p.sections, featured: p.featured, comingSoon: !!p.comingSoon,
   variants: p.variants.map(v => ({ name: v.name, inStock: !p.trackInventory || v.stock > 0 })),
-  inStock: !p.trackInventory || (p.variants.length ? p.variants.some(v => v.stock > 0) : p.stock > 0),
+  inStock: !p.comingSoon && (!p.trackInventory || (p.variants.length ? p.variants.some(v => v.stock > 0) : p.stock > 0)),
 });
 
 const courseOut = (c, owns = false) => ({

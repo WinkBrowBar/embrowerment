@@ -75,7 +75,7 @@ const productBody = z.object({
   variants: z.array(z.object({ name: z.string().trim().min(1), sku: z.string().optional().default(""), stock: z.coerce.number().int().min(0).default(0) })).default([]),
   stock: z.coerce.number().int().min(0).default(0), trackInventory: z.boolean().default(true),
   sections: z.array(z.object({ title: z.string().trim().min(1), body: z.string().default("") })).default([]),
-  featured: z.boolean().default(false), active: z.boolean().default(true), sort: z.coerce.number().default(0),
+  featured: z.boolean().default(false), comingSoon: z.boolean().default(false), active: z.boolean().default(true), sort: z.coerce.number().default(0),
 });
 r.get("/products", async (req, res) => {
   const q = req.query.q ? { name: { $regex: escapeRegex(String(req.query.q)), $options: "i" } } : {};
