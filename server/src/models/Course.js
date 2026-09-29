@@ -17,6 +17,8 @@ const courseSchema = new mongoose.Schema({
   image: { type: String, default: "" },
   points: { type: [String], default: [] },
   lessons: { type: [lessonSchema], default: [] },
+  purchaseUrl: { type: String, default: "" },   // if set, "Purchase" redirects here instead of the cart
+  comingSoon: { type: Boolean, default: false },
   active: { type: Boolean, default: true },
   sort: { type: Number, default: 0 },
 }, { timestamps: true });

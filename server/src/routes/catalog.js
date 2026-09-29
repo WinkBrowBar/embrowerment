@@ -14,7 +14,7 @@ const productOut = (p) => ({
 });
 
 const courseOut = (c, owns = false) => ({
-  id: c._id, title: c.title, slug: c.slug, summary: c.summary, description: c.description, price: c.price, image: c.image, points: c.points, owned: owns,
+  id: c._id, title: c.title, slug: c.slug, summary: c.summary, description: c.description, price: c.price, image: c.image, points: c.points, owned: owns, purchaseUrl: c.purchaseUrl || "", comingSoon: !!c.comingSoon,
   lessonCount: c.lessons.length, totalMinutes: c.lessons.reduce((n, l) => n + (l.durationMin || 0), 0),
   lessons: c.lessons.map(l => ({ id: l._id, title: l.title, durationMin: l.durationMin, preview: l.preview, ...(owns || l.preview ? { videoUrl: l.videoUrl, content: l.content } : {}) })),
 });

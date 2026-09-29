@@ -8,11 +8,11 @@ export function Courses() {
   return <Page title="Courses" actions={<Link className="btn primary" to="/courses/new">+ New course</Link>}>
     {error && <p className="error">{error}</p>}
     {data && (data.courses.length ? <table className="table card"><thead><tr><th></th><th>Title</th><th className="num">Price</th><th className="num">Lessons</th><th className="num">Students</th><th>Status</th></tr></thead>
-      <tbody>{data.courses.map((c: any) => <tr key={c._id}><td>{c.image && <img className="mini" src={c.image} alt="" />}</td><td><Link to={`/courses/${c._id}`}>{c.title}</Link></td><td className="num">{money(c.price)}</td><td className="num">{c.lessons.length}</td><td className="num">{c.students}</td><td>{c.active ? <span className="ok">Active</span> : <span className="muted">Hidden</span>}</td></tr>)}</tbody></table> : <Empty>No courses yet.</Empty>)}
+      <tbody>{data.courses.map((c: any) => <tr key={c._id}><td>{c.image && <img className="mini" src={c.image} alt="" />}</td><td><Link to={`/courses/${c._id}`}>{c.title}</Link>{c.comingSoon && <span className="pill">Coming soon</span>}{c.purchaseUrl && <span className="pill">External link</span>}</td><td className="num">{money(c.price)}</td><td className="num">{c.lessons.length}</td><td className="num">{c.students}</td><td>{c.active ? <span className="ok">Active</span> : <span className="muted">Hidden</span>}</td></tr>)}</tbody></table> : <Empty>No courses yet.</Empty>)}
   </Page>;
 }
 
-const blank = { title: "", slug: "", summary: "", description: "", price: 0, image: "", points: [] as string[], lessons: [] as any[], active: true, sort: 0 };
+const blank = { title: "", slug: "", summary: "", description: "", price: 0, image: "", points: [] as string[], lessons: [] as any[], purchaseUrl: "", comingSoon: false, active: true, sort: 0 };
 
 export function CourseEdit() {
   const { id } = useParams(); const nav = useNavigate(); const isNew = id === "new";
@@ -60,7 +60,11 @@ export function CourseEdit() {
       </div>
       <div className="stack">
         <section className="card"><h2>Cover image</h2><ImageUpload value={c.image ? [c.image] : []} onChange={v => set("image", v[0] || "")} /></section>
-        <section className="card stack-sm"><Toggle checked={c.active} onChange={v => set("active", v)} label="Visible in academy" /></section>
+        <section className="card stack-sm"><Toggle checked={c.active} onChange={v => set("active", v)} label="Visible in academy" />
+          <Toggle checked={!!c.comingSoon} onChange={v => set("comingSoon", v)} label="Coming soon (visible, not purchasable)" /></section>
+        <section className="card grid-form one">
+          <Field label="Purchase link" hint="Optional. If set, “Purchase Course” opens this link (e.g. Kajabi, Teachable, Stripe Payment Link) instead of adding to the bag."><input value={c.purchaseUrl || ""} onChange={e => set("purchaseUrl", e.target.value.trim())} placeholder="https://…" /></Field>
+        </section>
         <section className="card grid-form one">
           <Field label="URL slug" hint="Leave blank to generate from the title"><input value={c.slug} onChange={e => set("slug", e.target.value)} /></Field>
           <Field label="Sort order"><input type="number" value={c.sort} onChange={e => set("sort", e.target.value)} /></Field>

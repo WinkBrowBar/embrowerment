@@ -34,6 +34,8 @@ export async function quote(lines, { couponCode, user } = {}) {
     } else {
       const c = courses.find(x => String(x._id) === String(l.ref));
       if (!c || !c.active) { problems.push({ ref: l.ref, message: "Course no longer available" }); continue; }
+      if (c.comingSoon) { problems.push({ ref: l.ref, message: `${c.title} is coming soon` }); continue; }
+      if (c.purchaseUrl) { problems.push({ ref: l.ref, message: `${c.title} is purchased on an external page` }); continue; }
       if (seenCourse.has(String(c._id))) continue; seenCourse.add(String(c._id));
       if (owned.has(String(c._id))) { problems.push({ ref: l.ref, message: `You already own ${c.title}` }); continue; }
       items.push({ kind: "course", ref: c._id, slug: c.slug, name: c.title, variant: "", image: c.image, price: c.price, qty: 1, inStock: true });

@@ -98,6 +98,7 @@ const courseBody = z.object({
   title: z.string().trim().min(1), slug: z.string().trim().optional(), summary: z.string().default(""), description: z.string().default(""),
   price: z.coerce.number().min(0), image: z.string().default(""), points: z.array(z.string()).default([]),
   lessons: z.array(z.object({ _id: z.string().optional(), title: z.string().trim().min(1), videoUrl: z.string().default(""), durationMin: z.coerce.number().min(0).default(0), content: z.string().default(""), preview: z.boolean().default(false) })).default([]),
+  purchaseUrl: z.union([z.literal(""), z.url("Purchase link must be a full URL (https://…)")]).default(""), comingSoon: z.boolean().default(false),
   active: z.boolean().default(true), sort: z.coerce.number().default(0),
 });
 r.get("/courses", async (_req, res) => {
