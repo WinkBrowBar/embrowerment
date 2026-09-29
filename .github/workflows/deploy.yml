@@ -34,17 +34,17 @@ jobs:
 
             echo "Building Web..."
             cd web
-            npm ci
+            npm install
             npm run build
 
             echo "Building Admin..."
             cd ../admin
-            npm ci
+            npm install
             npm run build
 
             echo "Updating Server..."
             cd ../server
-            npm ci --omit=dev
+            npm install --omit=dev
 
             echo "Restarting backend..."
             pm2 restart winkbrow-server || pm2 start npm --name "winkbrow-server" -- start
